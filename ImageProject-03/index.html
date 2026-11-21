@@ -1,15 +1,164 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"> </script>
+    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
   </head>
   <body>
     <a-scene>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
+      <a-assets>
+        <img id="sky" src="assets/oceanequa.jpeg" />
+        <img id="sand" src="assets/sand.jpg" />
+        <img id="sandBase" src="assets/sandyFloor.jpg" />
+        <img id="waffle" src="assets/waffelcone.jpg" />
+        <img id="stripes" src="assets/strippedfabric.jpeg" />
+        <a-asset-item id="chair" src="assets/beachchair.glb"></a-asset-item>
+        <a-asset-item id="cooler" src="assets/cooler.glb"></a-asset-item>
+      </a-assets>
+
+      <!-- THIS IS THE OCEAN 
+      Basically its a circle with blue that goes out -->
+      <a-circle
+        rotation="-90 0 0"
+        radius="450"
+        position="0 -0.1 0"
+        color="#1B4F7A"
+      ></a-circle>
+
+      <!-- WET SAND 
+       SLightly darker ring where the water meets the beach.
+       This is a circle but the color is slightly darker and its heigher so it covers the water. The repeat just makes the image on the thing not ONE image -->
+      <a-circle
+        src="#sandBase"
+        rotation="-90 0 0"
+        radius="14"
+        position="0 -0.05 0"
+        repeat="6 6"
+        color="#B8A07A"
+      ></a-circle>
+
+      <!-- FOAM LINE THIS IS A RING INSTEAD OF A CIRCLE SINCE IT COVERS WATER AND SAND
+       The ring means that it can cover both without it being layered the same-->
+      <a-ring
+        rotation="-90 0 0"
+        radius-inner="13.6"
+        radius-outer="14.2"
+        position="0 -0.04 0"
+        color="#FFFFFF"
+        opacity="0.6"
+      ></a-ring>
+
+      <!-- THIS IS THE BEACH 
+      Little island!-->
+      <a-circle
+        src="#sandBase"
+        rotation="-90 0 0"
+        radius="12"
+        repeat="5 5"
+      ></a-circle>
+
+      <!-- An Entity is a container basically containing the objects 
+       inside the <a-entity> thing! -->
+      <!-- THIS IS THE ICE CREAM -->
+
+      <a-entity position="0 -.02 -3" scale="0.1 0.1 0.1" rotation="0 0 25">
+        <a-cone
+          src="#waffle"
+          radius-bottom="0"
+          radius-top="0.4"
+          height="1.2"
+          position="0 0.6 0"
+        ></a-cone>
+        <a-sphere color="#FFB6C1" radius="0.42" position="0 1.35 0"></a-sphere>
+        <a-sphere color="#FFF5D6" radius="0.40" position="0 1.8 0"></a-sphere>
+      </a-entity>
+      <!-- THIS IS THE UMBRELLA -->
+
+      <a-entity position="-.5 0 -4">
+        <a-cylinder
+          color="#FFFFFF"
+          radius="0.05"
+          height="2.5"
+          position="0 1.25 0"
+        ></a-cylinder>
+        <a-cone
+          src="#stripes"
+          radius-bottom="1.6"
+          radius-top="0"
+          height="0.7"
+          position="0 2.6 0"
+        ></a-cone>
+      </a-entity>
+
+      <!-- THIS IS THE COOLER -->
+      <a-entity scale="1.5 1.5 1.5">
+        <a-entity
+          gltf-model="#cooler"
+          position="0 0 -3"
+          rotation="0 0 0"
+          scale="800 800 800"
+        ></a-entity>
+      </a-entity>
+
+      <!-- THIS IS THE HANGOUT SPOT (chairs) -->
+      <a-entity position="3 0 -3">
+        <a-entity
+          gltf-model="#chair"
+          position="0 0.218 -1.5"
+          rotation="0 0 0"
+          scale="1 1 1"
+        ></a-entity>
+        <!-- Chairs facing the cooler -->
+        <a-entity
+          gltf-model="#chair"
+          position="0 0.218 -0.5"
+          rotation="0 0 0"
+          scale="1 1 1"
+        ></a-entity>
+      </a-entity>
+
+      <!-- THIS IS THE CASTLE -->
+
+      <a-entity position="0 0 -7" scale="0.5 0.5 0.5">
+        <a-box
+          src="#sand"
+          width="2"
+          height="1"
+          depth="1.5"
+          position="0 0.5 0"
+        ></a-box>
+        <a-cylinder
+          src="#sand"
+          radius="0.3"
+          height="1.6"
+          position="-1 0.8 0"
+        ></a-cylinder>
+        <a-cylinder
+          src="#sand"
+          radius="0.3"
+          height="1.6"
+          position="1 0.8 0"
+        ></a-cylinder>
+        <a-cone
+          src="#sand"
+          radius-bottom="0.35"
+          radius-top="0"
+          height="0.5"
+          position="-1 1.85 0"
+        ></a-cone>
+        <a-cone
+          src="#sand"
+          radius-bottom="0.35"
+          radius-top="0"
+          height="0.5"
+          position="1 1.85 0"
+        ></a-cone>
+      </a-entity>
+      <a-entity
+        id="testCooler"
+        gltf-model="url(assets/cooler.glb)"
+        position="0 1 -2"
+      ></a-entity>
+      <a-sky src="#sky"></a-sky>
     </a-scene>
   </body>
 </html>
